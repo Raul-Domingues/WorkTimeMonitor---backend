@@ -11,4 +11,14 @@ export class UserController {
             res.status(500).send('Error creating user');
         }
     }
+
+    static async getAllUsers(req: Request, res: Response) {
+        try {
+            const users = await UserService.getAllUsers();
+            res.status(200).json(users);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Error getting users');
+        }
+    }
 }
