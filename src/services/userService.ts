@@ -19,4 +19,44 @@ export class UserService {
       throw new Error('Failed to get all users');
     }
   }
+
+  static async getUserById(id: number) {
+    try {
+      const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+      return result.rows[0];
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to get user by id');
+    }
+  }
+
+  static async deleteUserById(id: number) {
+    try {
+      await pool.query('DELETE FROM users WHERE id = $1', [id]);
+      console.log('User deleted successfully');
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to delete user by id');
+    }
+  }
+
+  static async deleteAllUsers() {
+    try {
+      await pool.query('DELETE FROM users');
+      console.log('All users deleted successfully');
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to delete all users');
+    }
+  }
+
+  static async updateUserById(id: number, name: string, birthdate: string, email: string) {
+    try {
+      await pool.query('UPDATE users SET name = $1, birthdate = $2, email = $3 WHERE id = $4', [name, birthdate, email, id]);
+      console.log('User updated successfully');
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to update user by id');
+    }
+  }
 }
