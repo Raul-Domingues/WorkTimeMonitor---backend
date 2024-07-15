@@ -66,4 +66,15 @@ export class UserController {
             res.status(500).send('Error updating user');
         }
     }
+
+    static async saveHoursWorked(req: Request, res: Response) {
+        const { user_id, month, hours_worked } = req.body;
+        try {
+            await UserService.saveHoursWorked(user_id, month, hours_worked);
+            res.status(200).send('Hours worked saved successfully');
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Error saving hours worked');
+        }
+    }
 }

@@ -9,3 +9,4 @@ router.get('/getUserById/:id', UserController.getUserById);
 router.delete('/deleteUserById/:id', UserController.deleteUserById);
 router.delete('/deleteAllUsers', UserController.deleteAllUsers);
 router.put('/updateUserById/:id', UserController.updateUserById);
+router.post('/saveHoursWorked', UserController.saveHoursWorked);

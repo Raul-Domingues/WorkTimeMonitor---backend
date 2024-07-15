@@ -59,4 +59,14 @@ export class UserService {
       throw new Error('Failed to update user by id');
     }
   }
+
+  static async saveHoursWorked(user_id: number, month: number, hours_worked: number) {
+    try {
+      await pool.query('INSERT INTO work_logs (user_id, month, hours_worked) VALUES ($1, $2, $3)', [user_id, month, hours_worked]);
+      console.log('Hours worked saved successfully');
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to save hours worked');
+    }
+  }
 }
