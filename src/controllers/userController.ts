@@ -5,7 +5,7 @@ export class UserController {
         const { name, birthdate, email } = req.body;
         try {
             await UserService.createUser(name, birthdate, email);
-            res.status(201).send('User created successfully');
+            res.status(201).json({ message: 'User created successfully' });
         } catch (error) {
             console.log(error);
             res.status(500).send('Error creating user');
