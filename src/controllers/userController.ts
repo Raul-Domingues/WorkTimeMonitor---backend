@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { UserService } from '../services/userService';
 export class UserController {
     static async createUser(req: Request, res: Response) {
-        const { name, birthdate, email } = req.body;
+        const { name, birthdate, email, hourly_rate } = req.body;
         try {
-            await UserService.createUser(name, birthdate, email);
+            await UserService.createUser(name, birthdate, email, hourly_rate);
             res.status(201).json({ message: 'User created successfully' });
         } catch (error) {
             console.log(error);
@@ -57,24 +57,13 @@ export class UserController {
 
     static async updateUserById(req: Request, res: Response) {
         const userId = req.params.id;
-        const { name, birthdate, email } = req.body;
+        const { name, birthdate, email, hourly_rate } = req.body;
         try {
-            await UserService.updateUserById(JSON.parse(userId), name, birthdate, email);
+            await UserService.updateUserById(JSON.parse(userId), name, birthdate, email, hourly_rate);
             res.status(200).send('User updated successfully');
         } catch (error) {
             console.log(error);
             res.status(500).send('Error updating user');
-        }
-    }
-
-    static async saveHoursWorked(req: Request, res: Response) {
-        const { user_id, month, hours_worked } = req.body;
-        try {
-            await UserService.saveHoursWorked(user_id, month, hours_worked);
-            res.status(200).send('Hours worked saved successfully');
-        } catch (error) {
-            console.log(error);
-            res.status(500).send('Error saving hours worked');
         }
     }
 }
