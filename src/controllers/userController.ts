@@ -57,9 +57,9 @@ export class UserController {
 
     static async updateUserById(req: Request, res: Response) {
         const userId = req.params.id;
-        const { name, birthdate, email } = req.body;
+        const { name, birthdate, email, hourly_rate } = req.body;
         try {
-            await UserService.updateUserById(JSON.parse(userId), name, birthdate, email);
+            await UserService.updateUserById(JSON.parse(userId), name, birthdate, email, hourly_rate);
             res.status(200).send('User updated successfully');
         } catch (error) {
             console.log(error);
