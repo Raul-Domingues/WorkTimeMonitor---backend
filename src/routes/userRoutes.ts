@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/userController';
 
-export const router = Router();
+export const userRouter = Router();
 
-router.post('/cadastro', UserController.createUser);
-router.get('/getUsers', UserController.getAllUsers);
-router.get('/getUserById/:id', UserController.getUserById);
-router.delete('/deleteUserById/:id', UserController.deleteUserById);
-router.delete('/deleteAllUsers', UserController.deleteAllUsers);
-router.put('/updateUserById/:id', UserController.updateUserById);
+userRouter.post('/cadastro', UserController.createUser);
+userRouter.get('/getUsers', UserController.getAllUsers);
+userRouter.get('/getUserById/:id', UserController.getUserById);
+userRouter.delete('/deleteUserById/:id', UserController.deleteUserById);
+userRouter.delete('/deleteAllUsers', UserController.deleteAllUsers);
+userRouter.put('/updateUserById/:id', UserController.updateUserById);
