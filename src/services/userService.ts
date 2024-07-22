@@ -52,7 +52,7 @@ export class UserService {
 
   static async updateUserById(id: number, name: string, birthdate: string, email: string, hourly_rate: number) {
     try {
-      await pool.query('UPDATE users SET name = $1, birthdate = $2, email = $3, hourly_rate = $4, WHERE id = $5', [name, birthdate, email, hourly_rate, id]);
+      await pool.query('UPDATE users SET name = $1, birthdate = $2, email = $3, hourly_rate = $4 WHERE id = $5', [name, birthdate, email, hourly_rate, id]);
       console.log('User updated successfully');
     } catch (error) {
       console.error(error);
