@@ -11,42 +11,20 @@ export class hoursWorkedService {
         }
     }
 
-
     static async getWorkHoursSummary(month_year: string) {
         try {
             const result = await pool.query(`
-                SELECT u.id, u.name, w.month_year, SUM(w.hours_worked) as total_hours, SUM(w.hours_worked * u.hourly_rate) as total_earned
+                SELECT w.month_year, SUM(w.hours_worked) as total_hours, SUM(w.hours_worked * u.hourly_rate) as total_earned
                 FROM work_hours w
                 JOIN users u ON w.user_id = u.id
                 WHERE w.month_year = $1
-                GROUP BY u.id, u.name, w.month_year
+                GROUP BY w.month_year
             `, [month_year]);
-            return result.rows;
+            return result.rows[0];
         } catch (error) {
             console.error(error);
             throw new Error('Failed to fetch work hours summary');
         }
     }
-
-
-
-    
-
-
-    // static async getWorkHoursSummary(month_year: string) {
-    //     try {
-    //         const result = await pool.query(`
-    //             SELECT w.month_year, SUM(w.hours_worked) as total_hours, SUM(w.hours_worked * u.hourly_rate) as total_earned
-    //             FROM work_hours w
-    //             JOIN users u ON w.user_id = u.id
-    //             WHERE w.month_year = $1
-    //             GROUP BY w.month_year
-    //         `, [month_year]);
-    //         return result.rows[0];
-    //     } catch (error) {
-    //         console.error(error);
-    //         throw new Error('Failed to fetch work hours summary');
-    //     }
-    // }
 
 }
