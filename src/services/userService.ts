@@ -42,13 +42,14 @@ export class UserService {
 
   static async deleteAllUsers() {
     try {
-      await pool.query('DELETE FROM users');
-      console.log('All users deleted successfully');
-    } catch (error) {
-      console.error(error);
-      throw new Error('Failed to delete all users');
+        await pool.query('DELETE FROM work_hours WHERE user_id IN (SELECT id FROM users)');
+        await pool.query('DELETE FROM users');
+    } catch (err) {
+        console.error('Error deleting all users:', err);
+        throw err;
     }
-  }
+}
+
 
   static async updateUserById(id: number, name: string, birthdate: string, email: string, hourly_rate: number) {
     try {
